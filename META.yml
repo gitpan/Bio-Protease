@@ -1,0 +1,23 @@
+---
+abstract: 'Digest your protein substrates with customizable specificity'
+author:
+  - 'Bruno Vecchi <vecchi.b@gmail.com>'
+generated_by: 'Dist::Zilla::Plugin::MetaYAML version 1.092450'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Bio-Protease
+requires:
+  Carp: 0
+  Memoize: 0
+  Modern::Perl: 0
+  Moose: 0.72
+  MooseX::ClassAttribute: 0.08
+  MooseX::Types::Moose: 0
+  Test::Exception: 0
+  Test::More: 0.88
+  Test::Warn: 0
+  YAML::Any: 0
+  namespace::autoclean: 0
+version: 1.092550

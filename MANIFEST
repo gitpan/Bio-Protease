@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README.mkd
+dist.ini
+lib/Bio/Protease.pm
+lib/Bio/Protease/Types.pm
+lib/Bio/ProteaseI.pm
+t/00-load.t
+t/basic.t
+t/proteasei.t
+t/specificities.t
+t/specificities.txt
