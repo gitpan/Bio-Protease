@@ -1,5 +1,9 @@
 package Bio::ProteaseI;
-our $VERSION = '1.092550';
+our $VERSION = '1.092560';
+
+
+# ABSTRACT: A base class to build your customized Protease
+
 
 use Moose;
 use Carp;
@@ -9,6 +13,7 @@ use namespace::autoclean;
 memoize ('cleavage_sites');
 memoize ('is_substrate');
 memoize ('digest');
+
 
 sub cut {
     my ( $self, $substrate, $pos ) = @_;
@@ -37,6 +42,7 @@ sub cut {
     else { return }
 }
 
+
 sub digest {
     my ( $self, $substrate ) = @_;
     $substrate = uc $substrate;
@@ -59,6 +65,7 @@ sub digest {
 
     return @products;
 }
+
 
 sub is_substrate {
     my ($self, $substrate) = @_;
@@ -90,6 +97,7 @@ sub _cuts {
 
 }
 
+
 sub cleavage_sites {
     my ( $self, $substrate ) = @_;
     $substrate = uc $substrate;
@@ -112,6 +120,8 @@ sub DEMOLISH {
 
 __PACKAGE__->meta->make_immutable;
 
+
+
 __END__
 
 =pod
@@ -122,7 +132,7 @@ Bio::ProteaseI - A base class to build your customized Protease
 
 =head1 VERSION
 
-version 1.092550
+version 1.092560
 
 =head1 SYNOPSIS
 
@@ -142,16 +152,16 @@ version 1.092550
 
 =head1 DESCRIPTION
 
-This module describes the interface for Bio::Protease. You only need to
-use this if you want to build your custom specificity protease and
-regular expressions won't do; otherwise look at Bio::Protease instead.
+This module describes the interface for L<Bio::Protease>. You only need
+to use this if you want to build your custom specificity protease and
+regular expressions won't do; otherwise look at L<Bio::Protease>
+instead.
 
-=head1 METHODS
+All of the methods provided in Bio::Protease are defined here,
+incluiding a stub of the specificity-determining one, C<_cuts>. It has
+to be completed by the subclass with an C<augment> call.
 
-All of the methods provided in Bio::Protease (namely, cut, digest,
-is_substrate and cleavage_sites) are defined here, incluiding a stub of
-the specificity-determining one, '_cuts'. It has to be completed by the
-subclass with an 'augment' call.
+
 
 =head1 HOW TO SUBCLASS
 
@@ -193,9 +203,9 @@ L<Moose::Manual::MethodModifiers>), like so:
 
 And that's it. Your class will inherit all the methods mentioned above,
 and will work according to the specificity logic that you define in your
-_cuts() subroutine.
+C<_cuts()> subroutine.
 
-=head2 Example: a ridiculously specific protease.
+=head2 Example: a ridiculously specific protease
 
 Suppose you want to model a protease that only cleaves the sequence
 C<MAEL^VIKP>. Your Protease class would be like this:
@@ -225,4 +235,67 @@ Then you can use your class easily in your application:
 
     say for @products; # ["AAAAMAEL", "VIKPYYYYYYY"]
 
-=cut
+Of course, this specificity model is too simple to deserve subclassing,
+as it could be perfectly defined by a regex and passed to the
+C<specificity> attribute of L<Bio::Protease>. It's only used here to
+serve as an example.
+
+
+
+=head1 METHODS
+
+=head2 cut
+
+Attempt to cleave $peptide at the C-terminal end of the $i-th residue
+(ie, at the right). If the bond is indeed cleavable (determined by the
+enzyme's specificity), then a list with the two products of the
+hydrolysis will be returned. Otherwise, returns false.
+
+    my @products = $enzyme->cut($peptide, $i);
+
+=head2 digest
+
+Performs a complete digestion of the peptide argument, returning a list
+with possible products. It does not do partial digests (see method
+C<cut> for that).
+
+    my @products = $enzyme->digest($protein);
+
+
+
+=head2 is_substrate
+
+Returns true or false whether the peptide argument is a substrate or
+not. Esentially, it's equivalent to calling L<cleavage_sites> in scalar
+context, but with the difference that this method short-circuits when it
+finds its first cleavable site. Thus, it's useful for CPU-intensive
+tasks where the only information required is whether a polypeptide is or
+not a substrate of a particular enzyme.
+
+
+
+=head2 cleavage_sites
+
+Returns a list with siscile bonds (bonds susceptible to be cleaved as
+determined by the enzyme's specificity). Bonds are numbered starting
+from 1, from N to C-terminal. Takes a string with the protein sequence
+as an argument:
+
+    my @sites = $enzyme->cleavage_sites($peptide);
+
+
+
+=head1 AUTHOR
+
+  Bruno Vecchi <vecchi.b@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2009 by Bruno Vecchi.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut 
+
+

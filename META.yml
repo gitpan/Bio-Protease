@@ -20,4 +20,6 @@ requires:
   Test::Warn: 0
   YAML::Any: 0
   namespace::autoclean: 0
-version: 1.092550
+resources:
+  repository: http://github.com/brunoV/bio-protease/
+version: 1.092560
