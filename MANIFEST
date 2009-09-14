@@ -12,4 +12,4 @@ t/00-load.t
 t/basic.t
 t/proteasei.t
 t/specificities.t
-t/specificities.txt
+t/specificities.yaml

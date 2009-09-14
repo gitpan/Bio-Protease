@@ -1,5 +1,5 @@
 package Bio::ProteaseI;
-our $VERSION = '1.092560';
+our $VERSION = '1.092570';
 
 
 # ABSTRACT: A base class to build your customized Protease
@@ -132,7 +132,7 @@ Bio::ProteaseI - A base class to build your customized Protease
 
 =head1 VERSION
 
-version 1.092560
+version 1.092570
 
 =head1 SYNOPSIS
 
@@ -178,10 +178,10 @@ interfase using C<extends>.
 
 =head2 Step 2: augment _cuts()
 
-The C<_cuts> subroutine will be used by the methods C<digest>, C<cut>,
+The C<_cuts> method will be used by the methods C<digest>, C<cut>,
 C<cleavage_sites> and C<is_substrate>. It will B<always> be passed a
-reference to a string of 8 characters; if the subroutine returns true,
-then the peptide bond between the 4th and 5th residues will be marked as
+reference to a string of 8 characters; if the method returns true, then
+the peptide bond between the 4th and 5th residues will be marked as
 siscile, and the appropiate action will be performed depending on which
 method was called.
 
@@ -203,7 +203,7 @@ L<Moose::Manual::MethodModifiers>), like so:
 
 And that's it. Your class will inherit all the methods mentioned above,
 and will work according to the specificity logic that you define in your
-C<_cuts()> subroutine.
+C<_cuts()> method.
 
 =head2 Example: a ridiculously specific protease
 
@@ -266,7 +266,7 @@ C<cut> for that).
 =head2 is_substrate
 
 Returns true or false whether the peptide argument is a substrate or
-not. Esentially, it's equivalent to calling L<cleavage_sites> in scalar
+not. Esentially, it's equivalent to calling C<cleavage_sites> in boolean
 context, but with the difference that this method short-circuits when it
 finds its first cleavable site. Thus, it's useful for CPU-intensive
 tasks where the only information required is whether a polypeptide is or

@@ -9,7 +9,7 @@ WriteMakefile(
   NAME      => 'Bio::Protease',
   AUTHOR    => 'Bruno\ Vecchi\ \<vecchi\.b\@gmail\.com\>',
   ABSTRACT  => 'Digest\ your\ protein\ substrates\ with\ customizable\ specificity',
-  VERSION   => '1.092560',
+  VERSION   => '1.092570',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {
@@ -22,6 +22,7 @@ WriteMakefile(
     "Modern::Perl" => '0',
     "Test::More" => '0.88',
     "Test::Warn" => '0',
+    "autodie" => '2.00',
     "MooseX::ClassAttribute" => '0.08',
     "Moose" => '0.72',
   },

@@ -19,7 +19,8 @@ requires:
   Test::More: 0.88
   Test::Warn: 0
   YAML::Any: 0
+  autodie: 2.00
   namespace::autoclean: 0
 resources:
   repository: http://github.com/brunoV/bio-protease/
-version: 1.092560
+version: 1.092570

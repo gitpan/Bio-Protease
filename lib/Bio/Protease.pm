@@ -1,5 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.092560';
+our $VERSION = '1.092570';
 
 use Moose;
 use MooseX::ClassAttribute;
@@ -113,7 +113,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.092560
+version 1.092570
 
 =head1 SYNOPSIS
 
@@ -352,7 +352,7 @@ as an argument:
 =head2 is_substrate
 
 Returns true or false whether the peptide argument is a substrate or
-not. Esentially, it's equivalent to calling L<cleavage_sites> in scalar
+not. Esentially, it's equivalent to calling C<cleavage_sites> in boolean
 context, but with the difference that this method short-circuits when it
 finds its first cleavable site. Thus, it's useful for CPU-intensive
 tasks where the only information required is whether a polypeptide is or
