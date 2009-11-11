@@ -1,5 +1,5 @@
 package Bio::Protease::Types;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
 
@@ -41,7 +41,7 @@ Bio::Protease::Types - Specific types for Bio::Protease
 
 =head1 VERSION
 
-version 1.093150
+version 1.093151
 
 =head1 DESCRIPTION
 
@@ -51,7 +51,7 @@ subclass from Bio::ProteaseI.
 
 =head1 AUTHOR
 
-Bruno Vecchi <vecchi.b gmail.com>
+  Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

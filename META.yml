@@ -23,4 +23,4 @@ requires:
   namespace::autoclean: 0
 resources:
   repository: http://github.com/brunoV/bio-protease/
-version: 1.093150
+version: 1.093151

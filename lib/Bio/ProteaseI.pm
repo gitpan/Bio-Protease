@@ -1,5 +1,5 @@
 package Bio::ProteaseI;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
 
@@ -129,12 +129,12 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.093150
+version 1.093151
 
 =head1 SYNOPSIS
 
     package My::Protease;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
     use Moose;
@@ -160,10 +160,6 @@ instead.
 All of the methods provided in L<Bio::Protease> are defined here.
 The consuming class just has to implement a C<_cuts> method.
 
-=cut
-
-=pod
-
 =head1 METHODS
 
 =head2 cut
@@ -175,10 +171,6 @@ hydrolysis will be returned. Otherwise, returns false.
 
     my @products = $enzyme->cut($peptide, $i);
 
-=cut
-
-=pod
-
 =head2 digest
 
 Performs a complete digestion of the peptide argument, returning a list
@@ -186,10 +178,6 @@ with possible products. It does not do partial digests (see method
 C<cut> for that).
 
     my @products = $enzyme->digest($protein);
-
-=cut
-
-=pod
 
 =head2 is_substrate
 
@@ -200,10 +188,6 @@ finds its first cleavable site. Thus, it's useful for CPU-intensive
 tasks where the only information required is whether a polypeptide is a
 substrate of a particular enzyme or not 
 
-=cut
-
-=pod
-
 =head2 cleavage_sites
 
 Returns a list with siscile bonds (bonds susceptible to be cleaved as
@@ -213,16 +197,12 @@ as an argument:
 
     my @sites = $enzyme->cleavage_sites($peptide);
 
-=cut
-
-=pod
-
 =head1 How to implement your own Protease class.
 
 =head2 Step 1: create a class that does ProteaseI.
 
     package My::Protease;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
     use Moose;
@@ -267,7 +247,7 @@ Suppose you want to model a protease that only cleaves the sequence
 C<MAEL^VIKP>. Your Protease class would be like this:
 
     package My::Ridiculously::Specific::Protease;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
     use Moose;
@@ -301,7 +281,7 @@ example.
 
 =head1 AUTHOR
 
-Bruno Vecchi <vecchi.b gmail.com>
+  Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

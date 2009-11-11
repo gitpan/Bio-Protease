@@ -1,5 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.093150';
+our $VERSION = '1.093151';
 
 
 use Moose;
@@ -113,7 +113,46 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.093150
+version 1.093151
+
+=head1 SYNOPSIS
+
+    use Bio::Protease;
+    my $protease = Bio::Protease->new(specificity => 'trypsin');
+
+    my $protein = 'MRAERVIKP';
+
+    # Perform a full digestion
+    my @products = $protease->digest($protein);
+
+    # products: ( 'MR', 'AER', 'VIKP' )
+
+    # Get all the siscile bonds.
+    my @sites = $protease->cleavage_sites($protein);
+
+    # sites: ( 2, 5 )
+
+    # Try to cut at a specific position.
+
+    @products = $protease->cut($protein, 2);
+
+    # products: ( 'MR', 'AERVIKP' )
+
+=head1 DESCRIPTION
+
+This module models the hydrolitic behaviour of a proteolytic enzyme.
+Its main purpose is to predict the outcome of hydrolitic cleavage of a
+peptidic substrate.
+
+The enzyme specificity is currently modeled for 36 enzymes/reagents.
+This models are somewhat simplistic as they are largely regex-based, and
+do not take into account subtleties such as kinetic/temperature effects,
+accessible solvent area, secondary or tertiary structure elements.
+However, the module is flexible enough to allow the inclusion of any of
+these effects by consuming the module's interface, L<Bio::ProteaseI>.
+Alternatively, if your desired specificity can be correctly described by
+a regular expression, you can pass it as a string to the specificity
+attribute at construction time. See L<specificity> below.
 
 =head1 ATTRIBUTES
 
@@ -158,10 +197,6 @@ In the case your particular specificity rule requires an "or" clause,
 you can use the "|" separator in a single regex.
 
 =back
-
-=cut
-
-=pod
 
 =head2 Specificities
 
@@ -257,63 +292,6 @@ L<http://www.expasy.ch/tools/peptidecutter/peptidecutter_enzymes.html>,
 or look at the regular expressions of their definitions in this same
 file.
 
-=cut
-
-=pod
-
-=head1 SYNOPSIS
-
-    use Bio::Protease;
-    my $protease = Bio::Protease->new(specificity => 'trypsin');
-
-    my $protein = 'MRAERVIKP';
-
-    # Perform a full digestion
-    my @products = $protease->digest($protein);
-
-    # products: ( 'MR', 'AER', 'VIKP' )
-
-    # Get all the siscile bonds.
-    my @sites = $protease->cleavage_sites($protein);
-
-    # sites: ( 2, 5 )
-
-    # Try to cut at a specific position.
-
-    @products = $protease->cut($protein, 2);
-
-    # products: ( 'MR', 'AERVIKP' )
-
-=cut
-
-=pod
-
-=head1 WARNING: ALPHA CODE
-
-This module is still in its infancy, and I might change its interface in
-the future (although I'm not planning to). Use it at your own risk (but
-please do, and send feedback!).
-
-=head1 DESCRIPTION
-
-This module models the hydrolitic behaviour of a proteolytic enzyme.
-Its main purpose is to predict the outcome of hydrolitic cleavage of a
-peptidic substrate.
-
-The enzyme specificity is currently modeled for 36 enzymes/reagents.
-This models are somewhat simplistic as they are largely regex-based, and
-do not take into account subtleties such as kinetic/temperature effects,
-accessible solvent area, secondary or tertiary structure elements.
-However, the module is flexible enough to allow the inclusion of any of
-these effects by consuming the module's interface, L<Bio::ProteaseI>.
-Alternatively, if your desired specificity can be correctly described by
-a regular expression, you can pass it as a string to the specificity
-attribute at construction time. See L<specificity> below.
-
-=cut
-
-=pod
-
 =head1 METHODS
 
 =head2 digest
@@ -351,9 +329,11 @@ finds its first cleavable site. Thus, it's useful for CPU-intensive
 tasks where the only information required is whether a polypeptide is a
 substrate of a particular enzyme or not 
 
-=cut
+=head1 WARNING: ALPHA CODE
 
-=pod
+This module is still in its infancy, and I might change its interface in
+the future (although I'm not planning to). Use it at your own risk (but
+please do, and send feedback!).
 
 =head1 SEE ALSO
 
@@ -370,7 +350,7 @@ algorithm and the specificity definitions, check their page.
 
 =head1 AUTHOR
 
-Bruno Vecchi <vecchi.b gmail.com>
+  Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
