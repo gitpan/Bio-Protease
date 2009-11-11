@@ -4,12 +4,12 @@ use Modern::Perl;
 {
     package My::Protease;
     use Moose;
-    extends qw(Bio::ProteaseI);
+    with qw(Bio::ProteaseI);
 
-    augment _cuts => sub {
-        my ( $self, $subs_ref ) = @_;
+    sub _cuts {
+        my ( $self, $substrate ) = @_;
 
-        if ( $$subs_ref eq 'MAELVIKP' ) { return 1 }
+        if ( $substrate eq 'MAELVIKP' ) { return 1 }
         else                            { return   }
     };
 

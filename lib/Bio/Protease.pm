@@ -1,12 +1,13 @@
 package Bio::Protease;
-our $VERSION = '1.092570';
+our $VERSION = '1.093150';
+
 
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
 use namespace::autoclean;
 use Bio::Protease::Types qw(ProteaseRegex ProteaseName);
-extends 'Bio::ProteaseI';
+with 'Bio::ProteaseI';
 
 # ABSTRACT: Digest your protein substrates with customizable specificity
 
@@ -32,10 +33,10 @@ has specificity => (
     coerce   => 1
 );
 
-augment _cuts => sub {
+sub _cuts {
     my ($self, $peptide) = @_;
 
-    if ( grep { $$peptide !~ /$_/ } @{$self->_regex} ) {
+    if ( grep { $peptide !~ /$_/ } @{$self->_regex} ) {
         return;
     }
 
@@ -104,7 +105,6 @@ __PACKAGE__->meta->make_immutable;
 
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -113,71 +113,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.092570
-
-=head1 SYNOPSIS
-
-    use Bio::Protease;
-    my $protease = Bio::Protease->new(specificity => 'trypsin');
-
-    my $protein = 'MRAERVIKP';
-
-    # Perform a full digestion
-    my @products = $protease->digest($protein);
-
-    # products: ( 'MR', 'AER', 'VIKP' )
-
-    # Get all the siscile bonds.
-    my @sites = $protease->cleavage_sites($protein);
-
-    # sites: ( 2, 5 )
-
-    # Try to cut at a specific position.
-
-    @products = $protease->cut($protein, 2);
-
-    # products: ( 'MR', 'AERVIKP' )
-
-
-
-=head1 WARNING: ALPHA CODE
-
-This module is still in its infancy, and I might change its interface in
-the future (although I'm not planning to). Use it at your own discretion
-(but please do, and send feedback!).
-
-=head1 DESCRIPTION
-
-This module models the hydrolitic behaviour of a proteolytic enzyme.
-Its main purpose is to predict the outcome of hydrolitic cleavage of a
-peptidic substrate.
-
-The enzyme specificity is currently modeled for 36 enzymes/reagents.
-This models are somewhat simplistic as they are largely regex-based, and
-do not take into account subtleties such as kinetic/temperature effects,
-accessible solvent area, secondary or tertiary structure elements.
-However, the module is flexible enough to allow the inclusion of any of
-these effects by subclassing from the module's interface,
-L<Bio::ProteaseI>. Alternatively, if your desired specificity can be
-correctly described by a regular expression, you can pass it as a string
-the specificity attribute at construction time. See L<specificity> below.
-
-
-
-=head1 SEE ALSO
-
-=over 
-
-=item * PeptideCutter
-
-This module's idea is largely based on Expasy's
-PeptideCutter (L<http://www.expasy.ch/tools/peptidecutter/>). For more
-information on the experimental evidence that supports both the
-algorithm and the specificity definitions, check their page.
-
-=back 
-
-
+version 1.093150
 
 =head1 ATTRIBUTES
 
@@ -221,9 +157,11 @@ all of which should match the given octapeptide.
 In the case your particular specificity rule requires an "or" clause,
 you can use the "|" separator in a single regex.
 
-=back 
+=back
 
+=cut
 
+=pod
 
 =head2 Specificities
 
@@ -312,14 +250,69 @@ As a rule, all specificity names are lower case. Currently, they include:
 
 =item * trypsin
 
-=back 
+=back
 
 For a complete description of their specificities, you can check out
 L<http://www.expasy.ch/tools/peptidecutter/peptidecutter_enzymes.html>,
 or look at the regular expressions of their definitions in this same
 file.
 
+=cut
 
+=pod
+
+=head1 SYNOPSIS
+
+    use Bio::Protease;
+    my $protease = Bio::Protease->new(specificity => 'trypsin');
+
+    my $protein = 'MRAERVIKP';
+
+    # Perform a full digestion
+    my @products = $protease->digest($protein);
+
+    # products: ( 'MR', 'AER', 'VIKP' )
+
+    # Get all the siscile bonds.
+    my @sites = $protease->cleavage_sites($protein);
+
+    # sites: ( 2, 5 )
+
+    # Try to cut at a specific position.
+
+    @products = $protease->cut($protein, 2);
+
+    # products: ( 'MR', 'AERVIKP' )
+
+=cut
+
+=pod
+
+=head1 WARNING: ALPHA CODE
+
+This module is still in its infancy, and I might change its interface in
+the future (although I'm not planning to). Use it at your own risk (but
+please do, and send feedback!).
+
+=head1 DESCRIPTION
+
+This module models the hydrolitic behaviour of a proteolytic enzyme.
+Its main purpose is to predict the outcome of hydrolitic cleavage of a
+peptidic substrate.
+
+The enzyme specificity is currently modeled for 36 enzymes/reagents.
+This models are somewhat simplistic as they are largely regex-based, and
+do not take into account subtleties such as kinetic/temperature effects,
+accessible solvent area, secondary or tertiary structure elements.
+However, the module is flexible enough to allow the inclusion of any of
+these effects by consuming the module's interface, L<Bio::ProteaseI>.
+Alternatively, if your desired specificity can be correctly described by
+a regular expression, you can pass it as a string to the specificity
+attribute at construction time. See L<specificity> below.
+
+=cut
+
+=pod
 
 =head1 METHODS
 
@@ -333,9 +326,9 @@ C<cut> for that).
 
 =head2 cut
 
-Attempt to cleave $peptide at the C-terminal end of the $i-th residue
-(ie, at the right). If the bond is indeed cleavable (determined by the
-enzyme's specificity), then a list with the two products of the
+Attempt to cleave C<$peptide> at the C-terminal end of the C<$i>-th
+residue (ie, at the right). If the bond is indeed cleavable (determined
+by the enzyme's specificity), then a list with the two products of the
 hydrolysis will be returned. Otherwise, returns false.
 
     my @products = $enzyme->cut($peptide, $i);
@@ -355,14 +348,29 @@ Returns true or false whether the peptide argument is a substrate or
 not. Esentially, it's equivalent to calling C<cleavage_sites> in boolean
 context, but with the difference that this method short-circuits when it
 finds its first cleavable site. Thus, it's useful for CPU-intensive
-tasks where the only information required is whether a polypeptide is or
-not a substrate of a particular enzyme.
+tasks where the only information required is whether a polypeptide is a
+substrate of a particular enzyme or not 
 
+=cut
 
+=pod
+
+=head1 SEE ALSO
+
+=over
+
+=item * PeptideCutter
+
+This module's idea is largely based on Expasy's
+PeptideCutter (L<http://www.expasy.ch/tools/peptidecutter/>). For more
+information on the experimental evidence that supports both the
+algorithm and the specificity definitions, check their page.
+
+=back
 
 =head1 AUTHOR
 
-  Bruno Vecchi <vecchi.b@gmail.com>
+Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -371,6 +379,5 @@ This software is copyright (c) 2009 by Bruno Vecchi.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 

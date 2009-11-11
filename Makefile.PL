@@ -7,9 +7,9 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
   DISTNAME  => 'Bio-Protease',
   NAME      => 'Bio::Protease',
-  AUTHOR    => 'Bruno\ Vecchi\ \<vecchi\.b\@gmail\.com\>',
-  ABSTRACT  => 'Digest\ your\ protein\ substrates\ with\ customizable\ specificity',
-  VERSION   => '1.092570',
+  AUTHOR    => "Bruno\ Vecchi\ \<vecchi\.b\ gmail\.com\>",
+  ABSTRACT  => "Digest\ your\ protein\ substrates\ with\ customizable\ specificity",
+  VERSION   => '1.093150',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {
@@ -26,4 +26,6 @@ WriteMakefile(
     "MooseX::ClassAttribute" => '0.08',
     "Moose" => '0.72',
   },
+  test => {TESTS => 't/*.t'}
 );
+
