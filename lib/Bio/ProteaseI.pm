@@ -1,7 +1,5 @@
 package Bio::ProteaseI;
-our $VERSION = '1.093151';
-
-
+our $VERSION = '1.100420';
 
 # ABSTRACT: A role to build your customized Protease
 
@@ -129,14 +127,11 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.093151
+version 1.100420
 
 =head1 SYNOPSIS
 
     package My::Protease;
-our $VERSION = '1.093151';
-
-
     use Moose;
     with 'Bio::ProteaseI';
 
@@ -202,9 +197,6 @@ as an argument:
 =head2 Step 1: create a class that does ProteaseI.
 
     package My::Protease;
-our $VERSION = '1.093151';
-
-
     use Moose;
     with 'Bio::ProteaseI';
 
@@ -247,9 +239,6 @@ Suppose you want to model a protease that only cleaves the sequence
 C<MAEL^VIKP>. Your Protease class would be like this:
 
     package My::Ridiculously::Specific::Protease;
-our $VERSION = '1.093151';
-
-
     use Moose;
     with 'Bio::ProteaseI';
 
@@ -285,7 +274,7 @@ example.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Bruno Vecchi.
+This software is copyright (c) 2010 by Bruno Vecchi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

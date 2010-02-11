@@ -1,4 +1,5 @@
 use Test::More;
+use Modern::Perl;
 
 BEGIN { use_ok( 'Bio::Protease' ); }
 

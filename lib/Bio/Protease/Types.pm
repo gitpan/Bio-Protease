@@ -1,7 +1,5 @@
 package Bio::Protease::Types;
-our $VERSION = '1.093151';
-
-
+our $VERSION = '1.100420';
 
 # ABSTRACT: Specific types for Bio::Protease
 
@@ -41,7 +39,7 @@ Bio::Protease::Types - Specific types for Bio::Protease
 
 =head1 VERSION
 
-version 1.093151
+version 1.100420
 
 =head1 DESCRIPTION
 
@@ -55,7 +53,7 @@ subclass from Bio::ProteaseI.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Bruno Vecchi.
+This software is copyright (c) 2010 by Bruno Vecchi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

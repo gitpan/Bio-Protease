@@ -1,7 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.093151';
-
-
+our $VERSION = '1.100420';
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
@@ -113,7 +111,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.093151
+version 1.100420
 
 =head1 SYNOPSIS
 
@@ -354,7 +352,7 @@ algorithm and the specificity definitions, check their page.
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2009 by Bruno Vecchi.
+This software is copyright (c) 2010 by Bruno Vecchi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
