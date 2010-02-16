@@ -1,5 +1,5 @@
 package Bio::ProteaseI;
-our $VERSION = '1.100420';
+our $VERSION = '1.100470';
 
 # ABSTRACT: A role to build your customized Protease
 
@@ -26,7 +26,7 @@ sub cut {
     }
 
     $substrate = uc $substrate;
-    $substrate = 'XXX'. $substrate;
+    $substrate = _cap_head($substrate);
     $pos += 3;
 
     my $pep = substr($substrate, $pos - 4, 8);
@@ -35,7 +35,7 @@ sub cut {
         my $product = substr($substrate, 0, $pos);
         substr($substrate, 0, $pos) = '';
 
-        s/X//g for ($product, $substrate);
+        _uncap($product, $substrate);
 
         return ($product, $substrate);
     }
@@ -46,23 +46,22 @@ sub cut {
 
 sub digest {
     my ( $self, $substrate ) = @_;
-    $substrate = uc $substrate;
+
+    # Get the positions where the enzyme cuts
+    my @sites = $self->cleavage_sites($substrate);
+
+    # Get the peptide products;
     my @products;
-    my ($i, $j) = (0, 0);
-
-    $substrate = 'XXX' . $substrate;
-    while ( my $pep = substr($substrate, $i, 8) ) {
-        if ( $self->_cuts($pep) ) {
-            my $product = substr($substrate, $j, $i + 4 - $j);
-            push @products, $product;
-
-            $j = $i + 4;
-        }
-        $i++;
+    my $start = 0;
+    while ( my $site = shift @sites ) {
+        my $length = $site - $start;
+        my $product = substr($substrate, $start, $length);
+        push @products, $product;
+        $start += $length;
     }
-    push @products, substr($substrate, $j - length($substrate));
 
-    s/X//g for @products[0, -1];
+    # Last peptide: cut from last position to the end.
+    push @products, substr($substrate, $start);
 
     return @products;
 }
@@ -81,6 +80,15 @@ sub is_substrate {
 around _cuts => sub {
 
     my ($orig, $self, $substrate) = @_;
+
+    $substrate = _cap_tail($substrate) or return;
+
+    $self->$orig($substrate);
+};
+
+sub _cap_tail {
+    my $substrate = shift;
+
     my $length = length $substrate;
     if ( $length < 8 ) {
         if ( $length > 4 ) {
@@ -89,9 +97,13 @@ around _cuts => sub {
         else { return }
     }
 
-    $self->$orig($substrate);
+    return $substrate;
+}
 
-};
+sub _cap_head { return 'XXX' . shift }
+
+sub _uncap { s/X//g for @_ }
+
 
 
 sub cleavage_sites {
@@ -100,7 +112,7 @@ sub cleavage_sites {
     my @sites;
     my $i = 1;
 
-    $substrate = 'XXX' . $substrate;
+    $substrate = _cap_head($substrate);
     while ( my $pep = substr($substrate, $i-1, 8 ) ) {
         if ( $self->_cuts( $pep ) ) { push @sites, $i };
         ++$i;
@@ -127,7 +139,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.100420
+version 1.100470
 
 =head1 SYNOPSIS
 

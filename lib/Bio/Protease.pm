@@ -1,5 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.100420';
+our $VERSION = '1.100470';
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
@@ -111,7 +111,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.100420
+version 1.100470
 
 =head1 SYNOPSIS
 
@@ -326,12 +326,6 @@ context, but with the difference that this method short-circuits when it
 finds its first cleavable site. Thus, it's useful for CPU-intensive
 tasks where the only information required is whether a polypeptide is a
 substrate of a particular enzyme or not 
-
-=head1 WARNING: ALPHA CODE
-
-This module is still in its infancy, and I might change its interface in
-the future (although I'm not planning to). Use it at your own risk (but
-please do, and send feedback!).
 
 =head1 SEE ALSO
 
