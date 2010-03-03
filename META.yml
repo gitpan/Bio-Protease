@@ -2,7 +2,7 @@
 abstract: 'Digest your protein substrates with customizable specificity'
 author:
   - 'Bruno Vecchi <vecchi.b gmail.com>'
-generated_by: 'Dist::Zilla version 1.100160'
+generated_by: 'Dist::Zilla version 1.100600'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -24,4 +24,4 @@ requires:
   namespace::autoclean: 0
 resources:
   repository: http://github.com/brunoV/bio-protease/
-version: 1.100470
+version: 1.100620

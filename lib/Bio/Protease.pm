@@ -1,5 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.100470';
+our $VERSION = '1.100620';
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
@@ -9,17 +9,10 @@ with 'Bio::ProteaseI';
 
 # ABSTRACT: Digest your protein substrates with customizable specificity
 
-sub BUILDARGS {
-    my ($class, %args) = @_;
-
-    $args{_regex} = $args{specificity};
-
-    $class->SUPER::BUILDARGS(%args);
-}
-
 has _regex => (
     is  => 'ro',
     isa => ProteaseRegex,
+    init_arg => 'specificity',
     coerce => 1,
 );
 
@@ -52,6 +45,7 @@ class_has Specificities => (
 sub _build_Specificities {
 
     my %specificity_of = (
+        'alcalase'                   => [ '.{3}[MYFLIVW].{4}'],
         'arg-c_proteinase'           => [ '.{3}R.{4}' ],
         'asp-n_endopeptidase'        => [ '.{4}D.{3}' ],
         'asp-n_endopeptidase_glu'    => [ '.{4}[DE].{3}' ],
@@ -111,7 +105,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.100470
+version 1.100620
 
 =head1 SYNOPSIS
 
@@ -167,11 +161,11 @@ Set the enzyme's specificity. Required. Could be either of:
 There are currently definitions for 36 enzymes/reagents. See
 L<Specificities>.
 
-=item * an array reference of regular expressions:
+=item * a regular expression:
 
-    my $motif = ['MN[ED]K[^P].{3}'],
+    my $motif = qr/MN[ED]K[^P].{3}/,
 
-    my $enzyme = Bio::Protease->new(specificity => $motif);
+    my $enzyme = Bio::Protease->new( specificity => $motif );
 
 The motif should always describe an 8-character long peptide. When a an
 octapeptide matches the regex, its 4th peptidic bond (ie, between the
@@ -187,9 +181,13 @@ For example, the peptide AMQRNLAW is recognized as follows:
                       cleavage site
 
 Some specificity rules can only be described with more than one regular
-expression (See the case for trypsin, for example). To account for those
-cases, the array reference could contain an arbitrary number of regexes,
-all of which should match the given octapeptide.
+expression (see the case for trypsin, for example). To account for those
+cases, you can also pass an array reference of regular expressions; all
+of which should match the given octapeptide:
+
+    my $rule = [$rule1, $rule2, $rule3];
+
+    my $enzyme = Bio::Protease->new( specificity => $rule );
 
 In the case your particular specificity rule requires an "or" clause,
 you can use the "|" separator in a single regex.

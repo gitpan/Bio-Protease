@@ -1,9 +1,9 @@
 package Bio::Protease::Types;
-our $VERSION = '1.100470';
+our $VERSION = '1.100620';
 
 # ABSTRACT: Specific types for Bio::Protease
 
-use MooseX::Types::Moose qw(Str ArrayRef);
+use MooseX::Types::Moose qw(Str ArrayRef RegexpRef Any);
 use MooseX::Types -declare => [qw(ProteaseName ProteaseRegex)];
 use namespace::autoclean;
 use Carp qw(croak);
@@ -12,10 +12,12 @@ subtype ProteaseName, as Str;
 
 subtype ProteaseRegex, as ArrayRef;
 
-coerce ProteaseRegex, from Str, via { _str_to_prot_regex($_) };
+coerce ProteaseRegex,
+    from Str,       via { _str_to_prot_regex($_) },
+    from RegexpRef, via { [ $_ ] };
 
 coerce ProteaseName,
-    from ArrayRef, via { 'custom' };
+    from Any, via { 'custom' };
 
 sub _str_to_prot_regex {
     my $specificity = shift;
@@ -39,13 +41,13 @@ Bio::Protease::Types - Specific types for Bio::Protease
 
 =head1 VERSION
 
-version 1.100470
+version 1.100620
 
 =head1 DESCRIPTION
 
 This module defines specific types and type coercions to be used by
-Bio::Protease. It should not be used by end users, nor is necessary to
-subclass from Bio::ProteaseI.
+L<Bio::Protease>. It should not be used by end users or consumer of the
+Bio::ProteaseI role.
 
 =head1 AUTHOR
 

@@ -1,11 +1,11 @@
 package Bio::ProteaseI;
-our $VERSION = '1.100470';
+our $VERSION = '1.100620';
 
 # ABSTRACT: A role to build your customized Protease
 
 
 use Moose::Role;
-use Carp;
+use Carp 'croak';
 use Memoize qw(memoize flush_cache);
 use namespace::autoclean;
 
@@ -19,10 +19,12 @@ requires '_cuts';
 sub cut {
     my ( $self, $substrate, $pos ) = @_;
 
+    croak "Incorrect substrate argument"
+        unless ( defined $substrate and _looks_like_string($substrate) );
+
     unless ( defined $pos and $pos > 0 and $pos <= length $substrate ) {
 
-        carp "Incorrect position.";
-        return;
+        croak "Incorrect position.";
     }
 
     $substrate = uc $substrate;
@@ -47,8 +49,11 @@ sub cut {
 sub digest {
     my ( $self, $substrate ) = @_;
 
+    croak "Incorrect substrate argument"
+        unless ( defined $substrate and _looks_like_string($substrate) );
+
     # Get the positions where the enzyme cuts
-    my @sites = $self->cleavage_sites($substrate);
+    my @sites = $self->cleavage_sites($substrate) or return $substrate;
 
     # Get the peptide products;
     my @products;
@@ -69,6 +74,9 @@ sub digest {
 
 sub is_substrate {
     my ($self, $substrate) = @_;
+
+    croak "Incorrect substrate argument"
+        unless ( defined $substrate and _looks_like_string($substrate) );
 
     for my $pos (1 .. length $substrate) {
         return 1 if $self->cut($substrate, $pos);
@@ -104,10 +112,16 @@ sub _cap_head { return 'XXX' . shift }
 
 sub _uncap { s/X//g for @_ }
 
+sub _looks_like_string { $_[0] ~~ /[a-z]+/i }
+
 
 
 sub cleavage_sites {
     my ( $self, $substrate ) = @_;
+
+    croak "Incorrect substrate argument"
+        unless ( defined $substrate and _looks_like_string($substrate) );
+
     $substrate = uc $substrate;
     my @sites;
     my $i = 1;
@@ -139,7 +153,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.100470
+version 1.100620
 
 =head1 SYNOPSIS
 
