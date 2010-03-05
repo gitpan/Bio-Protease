@@ -1,5 +1,5 @@
 package Bio::ProteaseI;
-our $VERSION = '1.100620';
+our $VERSION = '1.100640';
 
 # ABSTRACT: A role to build your customized Protease
 
@@ -153,7 +153,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.100620
+version 1.100640
 
 =head1 SYNOPSIS
 

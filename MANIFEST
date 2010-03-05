@@ -5,7 +5,6 @@ META.yml
 Makefile.PL
 README.mkd
 dist.ini
-lib/Bio/.Protease.pm.swp
 lib/Bio/Protease.pm
 lib/Bio/Protease/Types.pm
 lib/Bio/ProteaseI.pm

@@ -1,5 +1,5 @@
 package Bio::Protease;
-our $VERSION = '1.100620';
+our $VERSION = '1.100640';
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
@@ -105,7 +105,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.100620
+version 1.100640
 
 =head1 SYNOPSIS
 
@@ -136,15 +136,15 @@ This module models the hydrolitic behaviour of a proteolytic enzyme.
 Its main purpose is to predict the outcome of hydrolitic cleavage of a
 peptidic substrate.
 
-The enzyme specificity is currently modeled for 36 enzymes/reagents.
+The enzyme specificity is currently modeled for 37 enzymes/reagents.
 This models are somewhat simplistic as they are largely regex-based, and
 do not take into account subtleties such as kinetic/temperature effects,
 accessible solvent area, secondary or tertiary structure elements.
 However, the module is flexible enough to allow the inclusion of any of
 these effects by consuming the module's interface, L<Bio::ProteaseI>.
 Alternatively, if your desired specificity can be correctly described by
-a regular expression, you can pass it as a string to the specificity
-attribute at construction time. See L<specificity> below.
+a regular expression, you can pass it to the specificity attribute at
+construction time. See L<specificity> below.
 
 =head1 ATTRIBUTES
 
@@ -158,7 +158,7 @@ Set the enzyme's specificity. Required. Could be either of:
 
     my $enzyme = Bio::Protease->new(specificity => 'enterokinase');
 
-There are currently definitions for 36 enzymes/reagents. See
+There are currently definitions for 37 enzymes/reagents. See
 L<Specificities>.
 
 =item * a regular expression:
@@ -208,6 +208,8 @@ value is an arrayref with the regular expressions that define them.
 As a rule, all specificity names are lower case. Currently, they include:
 
 =over 2
+
+=item * alcalase
 
 =item * arg-cproteinase
 

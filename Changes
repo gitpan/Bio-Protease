@@ -1,5 +1,10 @@
 Revision history for Bio-Protease
 
+1.100640  2010-03-05 02:13:12 America/Argentina/Buenos_Aires
+
+     - tidy up test file specificities.yaml due to some failing tests on darwin
+     - Several minor doc fixes
+
 1.100620  2010-03-03 12:11:29 America/Argentina/Buenos_Aires
 
     - Added specificity: alcalase
