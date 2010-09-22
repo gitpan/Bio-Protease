@@ -1,8 +1,9 @@
+Build.PL
 Changes
 LICENSE
 MANIFEST
-META.yml
-Makefile.PL
+META.json
+README
 README.mkd
 dist.ini
 lib/Bio/Protease.pm
@@ -11,5 +12,6 @@ lib/Bio/ProteaseI.pm
 t/00-load.t
 t/basic.t
 t/proteasei.t
+t/release-pod-syntax.t
 t/specificities.t
 t/specificities.yaml

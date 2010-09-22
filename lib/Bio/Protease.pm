@@ -1,5 +1,7 @@
 package Bio::Protease;
-our $VERSION = '1.100640';
+BEGIN {
+  $Bio::Protease::VERSION = '1.102650';
+}
 use Moose;
 use MooseX::ClassAttribute;
 use MooseX::Types::Moose qw(HashRef);
@@ -105,7 +107,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.100640
+version 1.102650
 
 =head1 SYNOPSIS
 
@@ -342,7 +344,7 @@ algorithm and the specificity definitions, check their page.
 
 =head1 AUTHOR
 
-  Bruno Vecchi <vecchi.b gmail.com>
+Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

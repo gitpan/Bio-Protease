@@ -1,0 +1,56 @@
+{
+   "abstract" : "Digest your protein substrates with customizable specificity",
+   "author" : [
+      "Bruno Vecchi <vecchi.b gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.102341, CPAN::Meta::Converter version 2.102400",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Bio-Protease",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : 0,
+            "Moose" : 0,
+            "Moose::Role" : 0,
+            "MooseX::ClassAttribute" : 0,
+            "MooseX::Types" : 0,
+            "MooseX::Types::Moose" : 0,
+            "namespace::autoclean" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Modern::Perl" : 0,
+            "Test::Exception" : 0,
+            "Test::More" : 0,
+            "YAML::Any" : 0,
+            "autodie" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "url" : "http://github.com/brunoV/bio-protease"
+      }
+   },
+   "version" : "1.102650"
+}
+

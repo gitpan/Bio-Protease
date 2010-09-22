@@ -1,17 +1,14 @@
 package Bio::ProteaseI;
-our $VERSION = '1.100640';
+BEGIN {
+  $Bio::ProteaseI::VERSION = '1.102650';
+}
 
 # ABSTRACT: A role to build your customized Protease
 
 
 use Moose::Role;
 use Carp 'croak';
-use Memoize qw(memoize flush_cache);
 use namespace::autoclean;
-
-memoize ('cleavage_sites');
-memoize ('is_substrate');
-memoize ('digest');
 
 requires '_cuts';
 
@@ -134,12 +131,6 @@ sub cleavage_sites {
     return @sites;
 }
 
-sub DEMOLISH {
-    flush_cache('digest');
-    flush_cache('cleavage_sites');
-    flush_cache('is_substrate');
-}
-
 1;
 
 
@@ -153,7 +144,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.100640
+version 1.102650
 
 =head1 SYNOPSIS
 
@@ -296,7 +287,7 @@ example.
 
 =head1 AUTHOR
 
-  Bruno Vecchi <vecchi.b gmail.com>
+Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
