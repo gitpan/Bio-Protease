@@ -22,18 +22,20 @@ my %module_build_args = (
     'Bruno Vecchi <vecchi.b gmail.com>'
   ],
   'dist_name' => 'Bio-Protease',
-  'dist_version' => '1.102650',
+  'dist_version' => '1.102660',
   'license' => 'perl',
   'module_name' => 'Bio::Protease',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
     'Carp' => '0',
+    'Memoize' => '0',
     'Moose' => '0',
     'Moose::Role' => '0',
     'MooseX::ClassAttribute' => '0',
     'MooseX::Types' => '0',
     'MooseX::Types::Moose' => '0',
+    'Sub::Name' => '0',
     'namespace::autoclean' => '0'
   },
   'script_files' => []

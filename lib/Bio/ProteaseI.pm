@@ -1,6 +1,6 @@
 package Bio::ProteaseI;
 BEGIN {
-  $Bio::ProteaseI::VERSION = '1.102650';
+  $Bio::ProteaseI::VERSION = '1.102660';
 }
 
 # ABSTRACT: A role to build your customized Protease
@@ -8,6 +8,8 @@ BEGIN {
 
 use Moose::Role;
 use Carp 'croak';
+use Memoize qw(memoize flush_cache);
+use Sub::Name qw(subname);
 use namespace::autoclean;
 
 requires '_cuts';
@@ -43,6 +45,15 @@ sub cut {
 }
 
 
+# Note: Memoization doesn't work for role methods, since memoize changes the
+# method name, and when the role is composed, it ignores subs that don't
+# belong to its package. The workaround involves renaming the sub that
+# returns memoize to its original package. See
+# http://www.nntp.perl.org/group/perl.moose/2009/05/msg795.html for a
+# discussion on the Moose mailing list
+
+*digest = subname 'Bio::ProteaseI::digest' => memoize('digest');
+
 sub digest {
     my ( $self, $substrate ) = @_;
 
@@ -68,6 +79,8 @@ sub digest {
     return @products;
 }
 
+
+*is_substrate = subname 'Bio::ProteaseI::is_substrate' => memoize('is_substrate');
 
 sub is_substrate {
     my ($self, $substrate) = @_;
@@ -113,6 +126,8 @@ sub _looks_like_string { $_[0] ~~ /[a-z]+/i }
 
 
 
+*cleavage_sites = subname( 'Bio::ProteaseI::cleavage_sites' => memoize ('cleavage_sites') );
+
 sub cleavage_sites {
     my ( $self, $substrate ) = @_;
 
@@ -144,7 +159,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.102650
+version 1.102660
 
 =head1 SYNOPSIS
 
