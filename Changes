@@ -1,5 +1,10 @@
 Revision history for Bio-Protease
 
+1.102670  2010-09-24 12:19:06 America/Argentina/Buenos_Aires
+
+      - Better code example in ProteaseI.pm
+      - Add cache flushing at DESTROY time. Fixes test failures on perl-5.12
+
 1.102660  2010-09-23 11:05:59 America/Argentina/Buenos_Aires
 
       - Use workaround in
@@ -55,4 +60,3 @@ Revision history for Bio-Protease
     - Documentation improvements.
     - Substitute "use ok" by "use_ok()" in test suite due to test
       failures on Solaris.
-

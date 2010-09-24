@@ -1,6 +1,6 @@
 package Bio::ProteaseI;
 BEGIN {
-  $Bio::ProteaseI::VERSION = '1.102660';
+  $Bio::ProteaseI::VERSION = '1.102670';
 }
 
 # ABSTRACT: A role to build your customized Protease
@@ -146,6 +146,12 @@ sub cleavage_sites {
     return @sites;
 }
 
+sub DEMOLISH {
+    flush_cache('digest');
+    flush_cache('is_substrate');
+    flush_cache('cleavage_sites');
+}
+
 1;
 
 
@@ -159,7 +165,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.102660
+version 1.102670
 
 =head1 SYNOPSIS
 
@@ -168,7 +174,7 @@ version 1.102660
     with 'Bio::ProteaseI';
 
     sub _cuts {
-        my ($self, $substrate) = @_;
+        my ($self, $peptide) = @_;
 
         # some code that decides
         # if $peptide should be cut or not
