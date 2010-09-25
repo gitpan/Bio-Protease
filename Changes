@@ -1,5 +1,12 @@
 Revision history for Bio-Protease
 
+1.102680  2010-09-25 18:34:03 America/Argentina/Buenos_Aires
+
+      - Implement optional, per-instance caching with Cache::Ref. No longer
+        using Memoize.
+      - Abstract the regex-specificity logic away in the
+        Bio::Protease::Role::Specificity::Regex role.
+
 1.102670  2010-09-24 12:19:06 America/Argentina/Buenos_Aires
 
       - Better code example in ProteaseI.pm
@@ -60,3 +67,4 @@ Revision history for Bio-Protease
     - Documentation improvements.
     - Substitute "use ok" by "use_ok()" in test suite due to test
       failures on Solaris.
+

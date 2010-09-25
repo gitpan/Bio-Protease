@@ -7,10 +7,12 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   'build_requires' => {
+    'Cache::Ref::Null' => '0',
     'Modern::Perl' => '0',
     'Module::Build' => '0.3601',
     'Test::Exception' => '0',
     'Test::More' => '0',
+    'Time::HiRes' => '0',
     'YAML::Any' => '0',
     'autodie' => '0'
   },
@@ -22,20 +24,19 @@ my %module_build_args = (
     'Bruno Vecchi <vecchi.b gmail.com>'
   ],
   'dist_name' => 'Bio-Protease',
-  'dist_version' => '1.102670',
+  'dist_version' => '1.102680',
   'license' => 'perl',
   'module_name' => 'Bio::Protease',
   'recommends' => {},
   'recursive_test_files' => 1,
   'requires' => {
+    'Cache::Ref::LRU' => '0',
     'Carp' => '0',
-    'Memoize' => '0',
     'Moose' => '0',
     'Moose::Role' => '0',
     'MooseX::ClassAttribute' => '0',
     'MooseX::Types' => '0',
     'MooseX::Types::Moose' => '0',
-    'Sub::Name' => '0',
     'namespace::autoclean' => '0'
   },
   'script_files' => []

@@ -1,22 +1,21 @@
 package Bio::Protease;
 BEGIN {
-  $Bio::Protease::VERSION = '1.102670';
+  $Bio::Protease::VERSION = '1.102680';
 }
 use Moose;
 use MooseX::ClassAttribute;
-use MooseX::Types::Moose qw(HashRef);
-use namespace::autoclean;
 use Bio::Protease::Types qw(ProteaseRegex ProteaseName);
-with 'Bio::ProteaseI';
+with qw(
+    Bio::ProteaseI
+    Bio::Protease::Role::Specificity::Regex
+    Bio::Protease::Role::WithCache
+);
+
+use namespace::autoclean;
 
 # ABSTRACT: Digest your protein substrates with customizable specificity
 
-has _regex => (
-    is  => 'ro',
-    isa => ProteaseRegex,
-    init_arg => 'specificity',
-    coerce => 1,
-);
+has '+regex' => ( init_arg => 'specificity' );
 
 
 has specificity => (
@@ -26,21 +25,9 @@ has specificity => (
     coerce   => 1
 );
 
-sub _cuts {
-    my ($self, $peptide) = @_;
-
-    if ( grep { $peptide !~ /$_/ } @{$self->_regex} ) {
-        return;
-    }
-
-    return 'yes, it cuts';
-
-};
-
 
 class_has Specificities => (
-    is      => 'ro',
-    isa     => HashRef,
+    is         => 'ro',
     lazy_build => 1,
 );
 
@@ -107,7 +94,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.102670
+version 1.102680
 
 =head1 SYNOPSIS
 
@@ -291,6 +278,32 @@ For a complete description of their specificities, you can check out
 L<http://www.expasy.ch/tools/peptidecutter/peptidecutter_enzymes.html>,
 or look at the regular expressions of their definitions in this same
 file.
+
+=head2 use_cache
+
+Turn caching on, trading memory for speed. Defaults to 0 (no caching).
+Useful when any method is being called several times with the same
+argument.
+
+    my $p = Bio::Protease->new( specificity => 'trypsin', use_cache => 0 );
+    my $c = Bio::Protease->new( specificity => 'trypsin', use_cache => 1 );
+
+    my $substrate = 'MAAEELRKVIKPR' x 10;
+
+    $p->digest( $substrate ) for (1..1000); # time: 5.11s
+    $c->digest( $substrate ) for (1..1000); # time: 0.12s
+
+=head2 cache
+
+The cache object, which has to do the L<Cache::Ref::Role::API> role.
+Uses L<Cache::Ref::LRU> by default with a cache size of 5000, but you
+can set this to your liking at construction time:
+
+    my $p = Bio::Protease->new(
+        use_cache   => 1,
+        cache       => Cache::Ref::Random->new( size => 50 ),
+        specificity => 'trypsin'
+    );
 
 =head1 METHODS
 

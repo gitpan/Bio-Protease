@@ -1,6 +1,6 @@
 package Bio::ProteaseI;
 BEGIN {
-  $Bio::ProteaseI::VERSION = '1.102670';
+  $Bio::ProteaseI::VERSION = '1.102680';
 }
 
 # ABSTRACT: A role to build your customized Protease
@@ -8,8 +8,6 @@ BEGIN {
 
 use Moose::Role;
 use Carp 'croak';
-use Memoize qw(memoize flush_cache);
-use Sub::Name qw(subname);
 use namespace::autoclean;
 
 requires '_cuts';
@@ -52,8 +50,6 @@ sub cut {
 # http://www.nntp.perl.org/group/perl.moose/2009/05/msg795.html for a
 # discussion on the Moose mailing list
 
-*digest = subname 'Bio::ProteaseI::digest' => memoize('digest');
-
 sub digest {
     my ( $self, $substrate ) = @_;
 
@@ -79,8 +75,6 @@ sub digest {
     return @products;
 }
 
-
-*is_substrate = subname 'Bio::ProteaseI::is_substrate' => memoize('is_substrate');
 
 sub is_substrate {
     my ($self, $substrate) = @_;
@@ -126,8 +120,6 @@ sub _looks_like_string { $_[0] ~~ /[a-z]+/i }
 
 
 
-*cleavage_sites = subname( 'Bio::ProteaseI::cleavage_sites' => memoize ('cleavage_sites') );
-
 sub cleavage_sites {
     my ( $self, $substrate ) = @_;
 
@@ -146,12 +138,6 @@ sub cleavage_sites {
     return @sites;
 }
 
-sub DEMOLISH {
-    flush_cache('digest');
-    flush_cache('is_substrate');
-    flush_cache('cleavage_sites');
-}
-
 1;
 
 
@@ -165,7 +151,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.102670
+version 1.102680
 
 =head1 SYNOPSIS
 
