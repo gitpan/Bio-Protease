@@ -24,7 +24,7 @@ my %module_build_args = (
     'Bruno Vecchi <vecchi.b gmail.com>'
   ],
   'dist_name' => 'Bio-Protease',
-  'dist_version' => '1.102680',
+  'dist_version' => '1.102690',
   'license' => 'perl',
   'module_name' => 'Bio::Protease',
   'recommends' => {},

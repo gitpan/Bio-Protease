@@ -1,13 +1,12 @@
 package Bio::Protease::Role::Specificity::Regex;
 BEGIN {
-  $Bio::Protease::Role::Specificity::Regex::VERSION = '1.102680';
+  $Bio::Protease::Role::Specificity::Regex::VERSION = '1.102690';
 }
 
 # ABSTRACT: A role that implements a regex-based specificity
 
 use Moose::Role;
 use Bio::Protease::Types 'ProteaseRegex';
-
 
 has regex => (
     is  => 'ro',
@@ -37,7 +36,7 @@ Bio::Protease::Role::Specificity::Regex - A role that implements a regex-based s
 
 =head1 VERSION
 
-version 1.102680
+version 1.102690
 
 =head1 SYNOPSIS
 

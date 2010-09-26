@@ -1,17 +1,15 @@
 package Bio::ProteaseI;
 BEGIN {
-  $Bio::ProteaseI::VERSION = '1.102680';
+  $Bio::ProteaseI::VERSION = '1.102690';
 }
 
 # ABSTRACT: A role to build your customized Protease
-
 
 use Moose::Role;
 use Carp 'croak';
 use namespace::autoclean;
 
 requires '_cuts';
-
 
 sub cut {
     my ( $self, $substrate, $pos ) = @_;
@@ -42,14 +40,6 @@ sub cut {
     else { return }
 }
 
-
-# Note: Memoization doesn't work for role methods, since memoize changes the
-# method name, and when the role is composed, it ignores subs that don't
-# belong to its package. The workaround involves renaming the sub that
-# returns memoize to its original package. See
-# http://www.nntp.perl.org/group/perl.moose/2009/05/msg795.html for a
-# discussion on the Moose mailing list
-
 sub digest {
     my ( $self, $substrate ) = @_;
 
@@ -74,7 +64,6 @@ sub digest {
 
     return @products;
 }
-
 
 sub is_substrate {
     my ($self, $substrate) = @_;
@@ -118,8 +107,6 @@ sub _uncap { s/X//g for @_ }
 
 sub _looks_like_string { $_[0] ~~ /[a-z]+/i }
 
-
-
 sub cleavage_sites {
     my ( $self, $substrate ) = @_;
 
@@ -142,6 +129,11 @@ sub cleavage_sites {
 
 
 
+
+
+
+
+
 __END__
 =pod
 
@@ -151,7 +143,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.102680
+version 1.102690
 
 =head1 SYNOPSIS
 

@@ -1,22 +1,22 @@
 package Bio::Protease;
 BEGIN {
-  $Bio::Protease::VERSION = '1.102680';
+  $Bio::Protease::VERSION = '1.102690';
 }
+
+# ABSTRACT: Digest your protein substrates with customizable specificity
+
 use Moose;
 use MooseX::ClassAttribute;
 use Bio::Protease::Types qw(ProteaseRegex ProteaseName);
+use namespace::autoclean;
+
 with qw(
     Bio::ProteaseI
     Bio::Protease::Role::Specificity::Regex
     Bio::Protease::Role::WithCache
 );
 
-use namespace::autoclean;
-
-# ABSTRACT: Digest your protein substrates with customizable specificity
-
 has '+regex' => ( init_arg => 'specificity' );
-
 
 has specificity => (
     is  => 'ro',
@@ -24,7 +24,6 @@ has specificity => (
     required => 1,
     coerce   => 1
 );
-
 
 class_has Specificities => (
     is         => 'ro',
@@ -85,6 +84,8 @@ __PACKAGE__->meta->make_immutable;
 
 
 
+
+
 __END__
 =pod
 
@@ -94,7 +95,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.102680
+version 1.102690
 
 =head1 SYNOPSIS
 

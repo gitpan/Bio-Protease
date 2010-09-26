@@ -1,6 +1,6 @@
 package Bio::Protease::Role::WithCache;
 BEGIN {
-  $Bio::Protease::Role::WithCache::VERSION = '1.102680';
+  $Bio::Protease::Role::WithCache::VERSION = '1.102690';
 }
 
 # ABSTRACT: A role that adds optional memoization of ProteaseI methods
@@ -9,9 +9,7 @@ use Moose::Role;
 use MooseX::Types::Moose 'Bool';
 use namespace::autoclean;
 
-
 has use_cache => ( is => 'ro', isa => Bool, default => 0 );
-
 
 has cache => (
     is        => 'ro',
@@ -53,7 +51,7 @@ Bio::Protease::Role::WithCache - A role that adds optional memoization of Protea
 
 =head1 VERSION
 
-version 1.102680
+version 1.102690
 
 =head1 SYNOPSIS
 
