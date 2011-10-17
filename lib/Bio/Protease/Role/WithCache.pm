@@ -1,6 +1,6 @@
 package Bio::Protease::Role::WithCache;
-BEGIN {
-  $Bio::Protease::Role::WithCache::VERSION = '1.102690';
+{
+  $Bio::Protease::Role::WithCache::VERSION = '1.112900'; # TRIAL
 }
 
 # ABSTRACT: A role that adds optional memoization of ProteaseI methods
@@ -51,7 +51,7 @@ Bio::Protease::Role::WithCache - A role that adds optional memoization of Protea
 
 =head1 VERSION
 
-version 1.102690
+version 1.112900
 
 =head1 SYNOPSIS
 
@@ -100,7 +100,7 @@ Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Bruno Vecchi.
+This software is copyright (c) 2011 by Bruno Vecchi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,11 +1,11 @@
 package Bio::Protease;
-BEGIN {
-  $Bio::Protease::VERSION = '1.102690';
+{
+  $Bio::Protease::VERSION = '1.112900'; # TRIAL
 }
 
 # ABSTRACT: Digest your protein substrates with customizable specificity
 
-use Moose;
+use Moose 1.23;
 use MooseX::ClassAttribute;
 use Bio::Protease::Types qw(ProteaseRegex ProteaseName);
 use namespace::autoclean;
@@ -95,7 +95,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.102690
+version 1.112900
 
 =head1 SYNOPSIS
 
@@ -362,7 +362,7 @@ Bruno Vecchi <vecchi.b gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Bruno Vecchi.
+This software is copyright (c) 2011 by Bruno Vecchi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
