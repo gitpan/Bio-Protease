@@ -1,5 +1,7 @@
 Revision history for Bio-Protease
 
+1.112980  2011-10-25 09:17:28 America/Argentina/Buenos_Aires
+
 1.112900  2011-10-16 22:39:00 America/Argentina/Buenos_Aires
       - Require Moose >= 1.23 explicitly
 

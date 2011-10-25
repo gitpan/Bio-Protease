@@ -1,6 +1,6 @@
 package Bio::Protease;
 {
-  $Bio::Protease::VERSION = '1.112900'; # TRIAL
+  $Bio::Protease::VERSION = '1.112980';
 }
 
 # ABSTRACT: Digest your protein substrates with customizable specificity
@@ -95,7 +95,7 @@ Bio::Protease - Digest your protein substrates with customizable specificity
 
 =head1 VERSION
 
-version 1.112900
+version 1.112980
 
 =head1 SYNOPSIS
 

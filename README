@@ -3,7 +3,7 @@ NAME
     specificity
 
 VERSION
-    version 1.112900
+    version 1.112980
 
 SYNOPSIS
         use Bio::Protease;

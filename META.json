@@ -48,7 +48,7 @@
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "repository" : {
          "type" : "git",
@@ -56,6 +56,6 @@
          "web" : "http://github.com/brunoV/bio-protease"
       }
    },
-   "version" : "1.112900"
+   "version" : "1.112980"
 }
 

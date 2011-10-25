@@ -1,6 +1,6 @@
 package Bio::Protease::Role::Specificity::Regex;
 {
-  $Bio::Protease::Role::Specificity::Regex::VERSION = '1.112900'; # TRIAL
+  $Bio::Protease::Role::Specificity::Regex::VERSION = '1.112980';
 }
 
 # ABSTRACT: A role that implements a regex-based specificity
@@ -36,7 +36,7 @@ Bio::Protease::Role::Specificity::Regex - A role that implements a regex-based s
 
 =head1 VERSION
 
-version 1.112900
+version 1.112980
 
 =head1 SYNOPSIS
 

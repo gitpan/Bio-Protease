@@ -1,6 +1,6 @@
 package Bio::Protease::Types;
 {
-  $Bio::Protease::Types::VERSION = '1.112900'; # TRIAL
+  $Bio::Protease::Types::VERSION = '1.112980';
 }
 
 # ABSTRACT: Specific types for Bio::Protease
@@ -43,7 +43,7 @@ Bio::Protease::Types - Specific types for Bio::Protease
 
 =head1 VERSION
 
-version 1.112900
+version 1.112980
 
 =head1 DESCRIPTION
 

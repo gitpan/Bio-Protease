@@ -1,6 +1,6 @@
 package Bio::Protease::Role::WithCache;
 {
-  $Bio::Protease::Role::WithCache::VERSION = '1.112900'; # TRIAL
+  $Bio::Protease::Role::WithCache::VERSION = '1.112980';
 }
 
 # ABSTRACT: A role that adds optional memoization of ProteaseI methods
@@ -51,7 +51,7 @@ Bio::Protease::Role::WithCache - A role that adds optional memoization of Protea
 
 =head1 VERSION
 
-version 1.112900
+version 1.112980
 
 =head1 SYNOPSIS
 

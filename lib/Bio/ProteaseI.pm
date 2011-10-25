@@ -1,6 +1,6 @@
 package Bio::ProteaseI;
 {
-  $Bio::ProteaseI::VERSION = '1.112900'; # TRIAL
+  $Bio::ProteaseI::VERSION = '1.112980';
 }
 
 # ABSTRACT: A role to build your customized Protease
@@ -143,7 +143,7 @@ Bio::ProteaseI - A role to build your customized Protease
 
 =head1 VERSION
 
-version 1.112900
+version 1.112980
 
 =head1 SYNOPSIS
 
